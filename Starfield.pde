@@ -1,13 +1,18 @@
 Particle[] particles;
+int partSize=5;
+int xdir=1;
+int ydir=1;
 public void setup()
 {
-	background(0);
+	background(100);
 	size(600,600);
 	particles = new Particle[300];
 	for (int i=0; i<300; i++)
 	{
 		particles[i]=new NormalParticle();
 	}
+	particles[0]=new OddballParticle();
+	particles[1]=new JumboParticle();
 }
 void draw()
 {
@@ -28,7 +33,7 @@ class NormalParticle implements Particle
 	{
 		x=300;
 		y=300;
-		speed=(Math.random()*4+1);
+		speed=(Math.random()*1+.5);
 		theta=(Math.random()*Math.PI*2);
 		paint=color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
 	}
@@ -41,15 +46,15 @@ class NormalParticle implements Particle
 	{
 		noStroke();
 		fill(paint);
-		ellipse((float)(x),(float)(y),10,10);
+		ellipse((float)(x),(float)(y),partSize,partSize);
 	}
 	void wrap()
 	{
-		if(x>600 || x<0 || y>600 || y<0)
+		if(x>650 || x<-50 || y>650 || y<-50)
 		{
 		x=300;
 		y=300;
-		speed=(Math.random()*4+1);
+		//speed=(Math.random()*2+1);
 		theta=(Math.random()*Math.PI*2);
 		}
 	}
@@ -60,12 +65,49 @@ interface Particle
 	public void move();
 	public void wrap();
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle
 {
-	//your code here
+double x,y,speed,theta;
+	color paint;
+	OddballParticle()
+	{
+		x=300;
+		y=300;
+		speed=3;
+		theta=(Math.random()*Math.PI*2);
+		paint=color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+	}
+	void move()
+	{
+
+		x=x+speed*xdir*cos((float)theta);
+		y=y+speed*ydir*sin((float)theta);
+		
+	}
+	void show()
+	{
+		noStroke();
+		fill(paint);
+		ellipse((float)(x),(float)(y),15,15);
+	}
+	void wrap() 
+	{
+		if(x>600 || x<0)
+		{
+			xdir=-xdir;
+		}
+		else if (y>600 || y<0)
+		{
+			ydir=-ydir;
+		}
+	}
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle//uses inheritance
 {
-	//your code here
+	void show()
+	{
+		fill(paint);
+		ellipse((float)(x),(float)(y),partSize*10,partSize*10);
+	}
 }
 
