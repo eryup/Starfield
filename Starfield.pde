@@ -75,7 +75,7 @@ double x,y,speed,theta;
 		y=300;
 		speed=3;
 		theta=(Math.random()*Math.PI*2);
-		paint=color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+		paint=color(255,255,255);
 	}
 	void move()
 	{
