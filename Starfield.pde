@@ -4,7 +4,7 @@ int xdir=1;
 int ydir=1;
 public void setup()
 {
-	background(100);
+	background(50);
 	size(600,600);
 	particles = new Particle[300];
 	for (int i=0; i<300; i++)
@@ -16,7 +16,7 @@ public void setup()
 }
 void draw()
 {
-		background(0);
+		background(50);
 	for (int i=0; i<300; i++)
 	{
 		particles[i].show();
